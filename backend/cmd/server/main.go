@@ -18,6 +18,19 @@ func main() {
 
 	// set up gin
 	router := gin.Default()
+	// Middleware CORS sederhana
+    router.Use(func(c *gin.Context) {
+        c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+        c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+        
+        if c.Request.Method == "OPTIONS" {
+            c.AbortWithStatus(204)
+            return
+        }
+        c.Next()
+    })
+	
 	router.MaxMultipartMemory = 20 << 20
 
 	// infrstruktur
