@@ -1,6 +1,5 @@
+import { PUBLIC_BASE_URL } from '$env/static/public';
 import type { GenerateResponse, GenerateRequest } from '$lib/types/api';
-
-const BASE_URL = 'https://etter-emplate-enerator-senoo128874-g8k2vocq1porsdi3n.leapcell-async.dev';
 
 export const letterService = {
     async generateLetter(payload: GenerateRequest): Promise<GenerateResponse> {
@@ -9,7 +8,7 @@ export const letterService = {
         formData.append('template', payload.template);
         formData.append('base_file_field', payload.base_file_field);
 
-        const response = await fetch(`${BASE_URL}/generate`, {
+        const response = await fetch(`${PUBLIC_BASE_URL}/generate`, {
             method: 'POST',
             body: formData,
         });
@@ -20,10 +19,10 @@ export const letterService = {
             throw new Error(result.error || result.message || 'Gagal memproses surat');
         }
 
-        return result; 
+        return result;
     },
 
     downloadFile(downloadPath: string) {
-        window.location.href = `${BASE_URL}${downloadPath}`;
+        window.location.href = `${PUBLIC_BASE_URL}${downloadPath}`;
     }
 };
