@@ -11,6 +11,12 @@
     let alertMsg: string | null = null;
     let alertType: 'error' | 'success' = 'error';
 
+    // Path file contoh -- taruh file aslinya di folder static/templates/
+    // SvelteKit (bukan di src/), supaya bisa diakses langsung sebagai URL.
+    const EXAMPLE_DOCX_URL = '/templates/Template_Surat.docx';
+    const EXAMPLE_XLSX_URL = '/templates/Template_Data_Surat.xlsx';
+    const EXAMPLE_ZIP_URL = '/templates/Contoh_Surat_Hasil_Generate.zip';
+
     async function handleProcess() {
         alertMsg = null;
         if (!excelFile || !templateFile || !baseFileField) {
@@ -101,6 +107,45 @@
                     placeholder="Contoh: Nama_Siswa"
                     class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition-all placeholder:text-slate-400"
                 />
+            </div>
+
+            <!-- Unduh contoh template -->
+            <div class="flex flex-col sm:flex-row gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <div class="flex-1">
+                    <p class="text-xs font-bold text-slate-700 mb-2">Belum punya file? Unduh contohnya:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <a
+                            href={EXAMPLE_DOCX_URL}
+                            download="Template_Surat.docx"
+                            class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 bg-blue-100 hover:bg-blue-200 transition-colors px-3 py-2 rounded-lg"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+                            </svg>
+                            Contoh Template Surat (.docx)
+                        </a>
+                        <a
+                            href={EXAMPLE_XLSX_URL}
+                            download="Template_Data_Surat.xlsx"
+                            class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 transition-colors px-3 py-2 rounded-lg"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+                            </svg>
+                            Contoh Data Excel (.xlsx)
+                        </a>
+                        <a
+                            href={EXAMPLE_ZIP_URL}
+                            download="Contoh_Surat_Hasil_Generate.zip"
+                            class="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700 bg-orange-100 hover:bg-orange-200 transition-colors px-3 py-2 rounded-lg"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+                            </svg>
+                            Contoh Surat Hasil Generate (.zip)
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
